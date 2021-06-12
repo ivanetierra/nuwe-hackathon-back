@@ -17,7 +17,6 @@ public class UserController {
 
 
   @GetMapping("/{id}")
-  @ResponseBody
   public User getUserById(@PathVariable("id") String id) {
     return userServiceImpl.getUserById(id);
   }
@@ -26,4 +25,19 @@ public class UserController {
   public void deleteUserById(@PathVariable("id") String id) {
     userServiceImpl.deleteUserById(id);
   }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<Object> editUser(@RequestBody User user, @PathVariable("id") String id){
+    try {
+      return ResponseEntity.ok().body(userServiceImpl.editUser(user, id));
+    }catch(Exception e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getCause());
+    }
+  }
+
+  @PostMapping
+  public User createUser(@RequestBody User user) {
+    return userServiceImpl.save(user);
+  }
+
 }

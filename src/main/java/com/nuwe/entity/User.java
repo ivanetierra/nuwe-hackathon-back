@@ -66,9 +66,7 @@ public class User {
         return isEmailVerified;
     }
 
-    public void setEmailVerified(boolean emailVerified) {
-        isEmailVerified = emailVerified;
-    }
+    public void setEmailVerified(boolean emailVerified) { isEmailVerified = emailVerified; }
 
     public String getPassword() {
         return password;

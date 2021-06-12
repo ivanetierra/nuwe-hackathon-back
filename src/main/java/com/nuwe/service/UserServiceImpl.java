@@ -20,4 +20,20 @@ public class UserServiceImpl implements IUserService {
   public void deleteUserById(String id) {
     iUserRepository.deleteById(id);
   }
+
+  public User editUser(User user,String id) {
+    User myUser = iUserRepository.findById(id).get();
+    myUser.setName(user.getName());
+    myUser.setUsername(user.getUsername());
+    myUser.setEmail(user.getEmail());
+    myUser.setPassword(user.getPassword());
+
+    return iUserRepository.save(myUser);
+
+  }
+
+
+  public User save(User user) {
+    return iUserRepository.save(user);
+  }
 }
