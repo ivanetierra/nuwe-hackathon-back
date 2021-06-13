@@ -15,17 +15,19 @@ public class UserController {
   @Autowired
   UserServiceImpl userServiceImpl;
 
-
+  //get a user by id
   @GetMapping("/{id}")
   public User getUserById(@PathVariable("id") String id) {
     return userServiceImpl.getUserById(id);
   }
 
+  //delete a user by id
   @DeleteMapping("/{id}")
   public void deleteUserById(@PathVariable("id") String id) {
     userServiceImpl.deleteUserById(id);
   }
 
+  //edit name, username, password and/or email of a user by id
   @PutMapping("/{id}")
   public ResponseEntity<Object> editUser(@RequestBody User user, @PathVariable("id") String id){
     try {
@@ -35,6 +37,7 @@ public class UserController {
     }
   }
 
+  //create a new user
   @PostMapping
   public User createUser(@RequestBody User user) {
     return userServiceImpl.save(user);

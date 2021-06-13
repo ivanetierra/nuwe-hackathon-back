@@ -3,20 +3,20 @@ package com.nuwe.entity;
 public class GithubUser {
 
     private String id;
-    private String username;
+    private String login;
     private String url;
-    private int repositories;
-    private String repositoriesURL;
+    private int public_repos;
+    private String repos_url;
 
     public GithubUser() {
     }
 
-    public GithubUser(String id, String username, String url, int repositories, String repositoriesURL) {
+    public GithubUser(String id, String login, String url, int public_repos, String repos_url) {
         this.id = id;
-        this.username = username;
+        this.login = login;
         this.url = url;
-        this.repositories = repositories;
-        this.repositoriesURL = repositoriesURL;
+        this.public_repos = public_repos;
+        this.repos_url = repos_url;
     }
 
     public String getId() {
@@ -27,12 +27,12 @@ public class GithubUser {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getLogin() {
+        return login;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getUrl() {
@@ -43,19 +43,19 @@ public class GithubUser {
         this.url = url;
     }
 
-    public int getRepositories() {
-        return repositories;
+    public int getPublic_repos() {
+        return public_repos;
     }
 
-    public void setRepositories(int repositories) {
-        this.repositories = repositories;
+    public void setPublic_repos(int public_repos) {
+        this.public_repos = public_repos;
     }
 
-    public String getRepositoriesURL() {
-        return repositoriesURL;
+    public String getRepos_url() {
+        return repos_url;
     }
 
-    public void setRepositoriesURL(String repositoriesURL) {
-        this.repositoriesURL = repositoriesURL;
+    public void setRepos_url(String repos_url) {
+        this.repos_url = repos_url;
     }
 }
