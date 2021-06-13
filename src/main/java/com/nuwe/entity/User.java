@@ -11,7 +11,7 @@ public class User {
     private String name;
     private String username;
     private String email;
-    private boolean isEmailVerified;
+    private boolean format_valid;
     private String password;
     private int gitlabUserId;
     private int countryId;
@@ -19,12 +19,12 @@ public class User {
     public User() {
     }
 
-    public User(String id, String name, String username, String email, boolean isEmailVerified, String password, int gitlabUserId, int countryId) {
+    public User(String id, String name, String username, String email, boolean format_valid, String password, int gitlabUserId, int countryId) {
         this.id = id;
         this.name = name;
         this.username = username;
         this.email = email;
-        this.isEmailVerified = isEmailVerified;
+        this.format_valid = format_valid;
         this.password = password;
         this.gitlabUserId = gitlabUserId;
         this.countryId = countryId;
@@ -62,11 +62,13 @@ public class User {
         this.email = email;
     }
 
-    public boolean isEmailVerified() {
-        return isEmailVerified;
+    public boolean getFormat_valid() {
+        return format_valid;
     }
 
-    public void setEmailVerified(boolean emailVerified) { isEmailVerified = emailVerified; }
+    public void setFormat_valid(boolean format_valid) {
+        this.format_valid = format_valid;
+    }
 
     public String getPassword() {
         return password;

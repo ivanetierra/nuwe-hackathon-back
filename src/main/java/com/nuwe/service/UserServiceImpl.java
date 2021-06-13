@@ -3,10 +3,13 @@ package com.nuwe.service;
 import com.nuwe.entity.GithubUser;
 import com.nuwe.exceptions.*;
 import com.nuwe.entity.User;
+import com.nuwe.repository.IGithubUserRepository;
 import com.nuwe.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Objects;
 
 
 @Service
@@ -14,6 +17,9 @@ public class UserServiceImpl implements IUserService {
 
   @Autowired
   IUserRepository iUserRepository;
+
+  @Autowired
+  IGithubUserRepository iGithubUserRepository;
 
   @Override
   public User getUserById(String id) {
@@ -42,6 +48,7 @@ public class UserServiceImpl implements IUserService {
     } else if (iUserRepository.existsByEmail(user.getEmail())) {
       throw new EmailExistsException(user.getEmail());
     } else {
+      user.setFormat_valid(checkEmail(user.getEmail()));
       return iUserRepository.save(user);
     }
   }
@@ -53,6 +60,20 @@ public class UserServiceImpl implements IUserService {
     RestTemplate restTemplate = new RestTemplate();
     GithubUser githubUser  = restTemplate.getForObject(url, GithubUser.class);
 
+    iGithubUserRepository.save(githubUser);
+
     return githubUser;
   }
+
+
+    public boolean checkEmail(String email) {
+
+      String apiKey = "ef91dabc791d89a28a14d1165a329cfc";
+      String url = "http://apilayer.net/api/check ? access_key = " + apiKey + "& email  = "+email+"& format = 1";
+
+      RestTemplate restTemplate = new RestTemplate();
+      boolean isValid = restTemplate.getForObject(url, User.class).getFormat_valid();
+      return isValid;
+
+    }
 }
