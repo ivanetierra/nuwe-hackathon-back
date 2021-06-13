@@ -15,6 +15,7 @@ public class GithubUserController {
     @Autowired
     UserServiceImpl userServiceImpl;
 
+    //enter a github username and get GithubUser info
     @GetMapping("/{username}")
     public GithubUser getGithubUserByUsername(@PathVariable("username") String username) {
         return userServiceImpl.getGithubUserByUsername(username);
