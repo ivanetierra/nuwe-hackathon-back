@@ -37,6 +37,7 @@ public class UserServiceImpl implements IUserService {
     myUser.setEmail(user.getEmail());
     myUser.setPassword(user.getPassword());
 
+    user.setFormat_valid(checkEmail(user.getEmail())); //check new email before saving user
     return iUserRepository.save(myUser);
 
   }
@@ -67,13 +68,17 @@ public class UserServiceImpl implements IUserService {
 
 
     public boolean checkEmail(String email) {
+      String apiKey = "369a7a1b4f6a2462bac5f1d92e56361f";
 
-      String apiKey = "ef91dabc791d89a28a14d1165a329cfc";
-      String url = "http://apilayer.net/api/check ? access_key = " + apiKey + "& email  = "+email+"& format = 1";
+      String url = "http://apilayer.net/api/check?access_key="+apiKey+"&email="+email+"&smtp=1&format=1";
 
       RestTemplate restTemplate = new RestTemplate();
-      boolean isValid = restTemplate.getForObject(url, User.class).getFormat_valid();
-      return isValid;
 
+      //String result = restTemplate.getForObject(url, String.class);
+      //System.out.println(result);
+
+      User user = restTemplate.getForObject(url, User.class);
+      iUserRepository.save(user);
+      return user.getFormat_valid();
     }
 }
